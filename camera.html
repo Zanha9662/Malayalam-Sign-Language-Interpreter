@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Camera - SignConnect</title>
+
+    <style>
+        body {
+            background: linear-gradient(to right, #4e73df, #1cc88a);
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            color: white;
+            padding-top: 50px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        #video {
+            width: 700px;
+            border-radius: 15px;
+            border: 3px solid white;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            background: white;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>📷 Live Camera</h1>
+
+<img id="video" src="/video_feed">
+
+<br>
+
+<button onclick="stopCamera()">Stop Camera</button>
+
+<script>
+function stopCamera() {
+    fetch("/stop");
+    window.location.href = "/";
+}
+
+//  Q press → stop
+document.addEventListener("keydown", function(event) {
+    if (event.key === "q") {
+        fetch("/stop");
+        window.location.href = "/";
+    }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Sign</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+
+            /* MAIN THEME BACKGROUND */
+            background: linear-gradient(to right, #4e73df, #1cc88a);
+        }
+
+        .box {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 35px;
+            border-radius: 20px;
+            text-align: center;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+            width: 320px;
+        }
+
+        h2 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        /* Hide default file input */
+        input[type="file"] {
+            display: none;
+        }
+
+        /* Choose File Button */
+        .file-label {
+            display: inline-block;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .file-label:hover {
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        /* File name text */
+        #fileName {
+            margin-top: 15px;
+            color: white;
+            font-size: 14px;
+        }
+
+        /* Upload button */
+        button {
+            margin-top: 20px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: rgba(255, 255, 255, 0.35);
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <h2>Upload Sign Image</h2>
+
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+
+        <!-- Choose File Button -->
+        <label for="file" class="file-label">Choose File</label>
+        <input type="file" name="file" id="file" accept="image/*" required>
+
+        <!-- File Name -->
+        <div id="fileName">No file chosen</div>
+
+        <!-- Upload Button -->
+        <button type="submit">Upload</button>
+
+    </form>
+
+</div>
+
+<script>
+    const fileInput = document.getElementById("file");
+    const fileName = document.getElementById("fileName");
+
+    fileInput.addEventListener("change", function () {
+        if (this.files.length > 0) {
+            fileName.textContent = "Selected: " + this.files[0].name;
+        } else {
+            fileName.textContent = "No file chosen";
+        }
+    });
+</script>
+
+</body>
+</html>

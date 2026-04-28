@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SignConnect</title>
+
+    <style>
+        body {
+            background: linear-gradient(to right, #4e73df, #1cc88a);
+            font-family: 'Poppins', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+        }
+
+        .container {
+            border-radius: 20px;
+            padding: 50px 40px;
+            width: 450px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 42px;
+            letter-spacing: 1px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 35px;
+        }
+
+        .section {
+            margin: 20px 0;
+        }
+
+        .option-box {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin: 12px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+            display: inline-block;
+            width: 100%;
+            border: none;
+        }
+
+        .option-box:hover {
+            background-color: rgba(255, 255, 255, 0.35);
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+        }
+
+        .small-btn {
+            width: 220px;
+            padding: 8px 12px;
+            font-size: 14px;
+        }
+
+        .tagline {
+            margin-top: 35px;
+            font-style: italic;
+            font-size: 16px;
+            color: #e0e0e0;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        /* CAMERA VIEW */
+        #video {
+    display: none;
+    margin-top: 20px;
+    width: 600px;
+    height: 450px;
+    border-radius: 15px;
+    border: 2px solid white;
+}
+    </style>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container">
+    <h1>🤟 SignConnect</h1>
+    <p><b>Real-Time Hand Recognition Using AI</b></p>
+
+    <div class="section">
+
+    <!--  FIXED UPLOAD -->
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <label class="option-box small-btn" for="fileInput">Upload Image</label>
+        <input type="file" name="file" id="fileInput"
+               accept="image/*"
+               required
+               onchange="this.form.submit()">
+    </form>
+
+    <!-- Start Camera -->
+    <button class="option-box small-btn" onclick="startCamera()">Start Camera</button>
+
+</div>
+
+    <!--  CAMERA OUTPUT -->
+    <img id="video" style="width:600px; height:450px;">
+
+    <div class="tagline">
+        Transforming Hand Gestures Into Words
+    </div>
+</div>
+
+<script>
+function startCamera() {
+    fetch("/start")
+    .then(response => response.text())
+    .then(data => {
+
+        if (data.includes("Failed")) {
+            alert("Camera not working ❌");
+            return;
+        }
+
+        //  SHOW CAMERA
+        let video = document.getElementById("video");
+        video.src = "/video_feed";
+        video.style.display = "block";
+
+    })
+    .catch(error => {
+        alert("Error starting camera");
+    });
+}
+
+// PRESS Q → STOP CAMERA
+document.addEventListener("keydown", function(event) {
+
+    if (event.key === "q") {
+
+        fetch("/stop");
+
+        let video = document.getElementById("video");
+        video.style.display = "none";
+        video.src = "";
+
+        alert("Camera Stopped");
+    }
+
+});
+</script>
+
+</body>
+</html>
