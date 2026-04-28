@@ -1,4 +1,4 @@
-# Malayalam Sign Language Interpreter
+# MALAYALAM SIGN LANGUAGE INTERPRETER
 
 ## Introduction
 This project is a web-based Malayalam Sign Language Interpreter built using Flask and AI. It detects hand gestures through a webcam and converts them into text in real time.
