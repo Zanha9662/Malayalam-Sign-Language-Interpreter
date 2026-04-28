@@ -32,3 +32,17 @@ Example: hand sign for the letter "RA".
 
 ```bash
 pip install flask opencv-python mediapipe tensorflow
+```
+
+---
+
+
+## How to Run
+
+Run the application:
+```bash
+python app.py
+```
+
+
+
