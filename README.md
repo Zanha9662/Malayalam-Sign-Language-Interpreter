@@ -24,7 +24,7 @@ This project is a web-based Malayalam Sign Language Interpreter built using Flas
 
 ## Dataset
 A custom dataset was created by capturing hand gesture images using a webcam.  
-Example: hand sign for the letter "R".
+Example: hand sign for the letter "RA".
 
 ---
 
